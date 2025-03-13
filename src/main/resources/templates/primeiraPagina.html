@@ -6,10 +6,14 @@
   <body>
     <p th:text="${mensagemDaController}"></p>
 
-    <form method="post" th:action="@{/create}">
-      Nome do candidato: <input type="text" name="nome_do_candidato" />
+    <form method="post" th:action="@{/create}" th:object="${pessoa}">
+      Nome do candidato: <input type="text" name="nome" />
       <br />
-      <button type="submit">Cadastrar candidato</button>
+      Email: <input type="text" name="email" />
+      <br />
+      Usuário: <input type="text" name="usuario" />
+      <br />
+      <button>Cadastrar candidato</button>
   </form>
   </body>
 </html>
