@@ -1,6 +1,7 @@
 package br.com.joaopedro.front_gestao_vagas.modules.Candidate.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CandidateService;
+import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ProfileCandidateService;
 import jakarta.servlet.http.HttpSession;
  
  @Controller
@@ -23,6 +25,9 @@ import jakarta.servlet.http.HttpSession;
      @Autowired
      private CandidateService candidateService;
  
+     @Autowired
+     private ProfileCandidateService profileCandidateService;
+
      @GetMapping("/login")
      public String login(){
          return "candidate/login";
@@ -53,6 +58,10 @@ import jakarta.servlet.http.HttpSession;
      @GetMapping("/profile")
      @PreAuthorize("hasRole('CANDIDATE')")
      public String profile(){
-         return "candidate/profile";
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var result = this.profileCandidateService.execute(authentication.getDetails().toString());
+
+        return "candidate/profile";
      }
  }
