@@ -32,4 +32,9 @@ import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CandidateSe
             return "redirect:/candidate/login";
         }
      }
+
+     @GetMapping("/profile")
+     public String profile(){
+         return "candidate/profile";
+     }
  }
