@@ -88,7 +88,9 @@ import jakarta.servlet.http.HttpSession;
         }
         
         if (filter != null) {
-            this.findJobsService.execute(filter, token);
+            var jobs = this.findJobsService.execute(filter, token);
+            System.out.println(jobs);
+            model.addAttribute("jobs", jobs);
         }
         
         } catch(HttpClientErrorException e){
