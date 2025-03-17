@@ -59,12 +59,16 @@ import jakarta.servlet.http.HttpSession;
      @GetMapping("/profile")
      @PreAuthorize("hasRole('CANDIDATE')")
      public String profile(Model model){
-
+        try {
+            
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var user = this.profileCandidateService.execute(authentication.getDetails().toString());
 
         model.addAttribute("user", user);
 
         return "candidate/profile";
+        } catch (HttpClientErrorException e) {
+            return "redirect:/candidate/login";
+        }
      }
  }
