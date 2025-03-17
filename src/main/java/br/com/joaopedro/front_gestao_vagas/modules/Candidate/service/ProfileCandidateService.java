@@ -8,9 +8,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.joaopedro.front_gestao_vagas.modules.Candidate.dto.ProfileDTO;
+
 @Service
 public class ProfileCandidateService {
- public String execute(String token) {
+ public ProfileDTO execute(String token) {
   RestTemplate rt = new RestTemplate();
   HttpHeaders headers = new HttpHeaders();
   headers.setBearerAuth(token);
@@ -21,7 +23,7 @@ public class ProfileCandidateService {
    "http://localhost:8080/candidate/", 
    HttpMethod.GET,
    request,
-   String.class);
+   ProfileDTO.class);
   System.out.println(result);
   return result.getBody();
  } 
