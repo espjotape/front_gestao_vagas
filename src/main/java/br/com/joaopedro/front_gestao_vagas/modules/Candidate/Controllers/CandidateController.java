@@ -71,4 +71,10 @@ import jakarta.servlet.http.HttpSession;
             return "redirect:/candidate/login";
         }
      }
+
+    @GetMapping("/jobs")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public String jobs() {
+        return "candidate/jobs";
+    }
  }
