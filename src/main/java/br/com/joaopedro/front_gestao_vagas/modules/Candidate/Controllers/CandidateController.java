@@ -16,6 +16,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CandidateService;
+import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.FindJobsService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ProfileCandidateService;
 import jakarta.servlet.http.HttpSession;
  
@@ -28,6 +29,9 @@ import jakarta.servlet.http.HttpSession;
  
      @Autowired
      private ProfileCandidateService profileCandidateService;
+     
+     @Autowired
+     private FindJobsService findJobsService;
 
      @GetMapping("/login")
      public String login(){
@@ -74,7 +78,29 @@ import jakarta.servlet.http.HttpSession;
 
     @GetMapping("/jobs")
     @PreAuthorize("hasRole('CANDIDATE')")
-    public String jobs() {
+    public String  jobs(Model model, String filter){
+    try{
+        String token = getToken();
+
+        if (token == null) {
+            System.out.println("Token não encontrado! Redirecionando para login...");
+            return "redirect:/candidate/login";
+        }
+        
+        if (filter != null) {
+            this.findJobsService.execute(filter, token);
+        }
+        
+        } catch(HttpClientErrorException e){
+            System.out.println("Token inválido! Redirecionando para login...");
+            return "redirect:/candidate/login";
+        }
         return "candidate/jobs";
     }
+
+    private String getToken(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getDetails().toString();
+     }
+ 
  }
