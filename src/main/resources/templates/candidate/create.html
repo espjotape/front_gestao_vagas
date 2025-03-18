@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Cadastro do Candidato</title>
+</head>
+<body class="bg-gray-900 h-screen items-center flex justify-center">
+ <form id="submitForm" action="" class="flex gap-24" th:action="@{/candidate/signIn}" method="post">
+
+   <div class="space-y-8 bg-zinc-950 rounded-md p-10 ">
+    <h2 class="text-white text-center">Candidato, crie o seu cadastro gratuitamente</h2>
+    <input type="text" name="username" placeholder="User" 
+     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+     <input type="text" name="name" placeholder="Nome" 
+     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+     <input type="email" name="email" placeholder="Email"
+     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+     <input type="password" name="password" placeholder="Password" id="password"
+     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+     <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirmPassword"
+     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+     <textarea name="description" placeholder="Digite uma breve descrição sobre você" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2"></textarea>
+     
+     <p class="text-red-400 hidden" id="error_password">Senhas não conferem</p>
+  
+     <button class="bg-green-900 w-96 p-4 rounded text-white hover:bg-green-700">Cadastrar-se</button>
+     <a href="candidate/login" class="block text-green-700 text-center underline underline-offset-2 hover:text-green-600">Fazer Login</a>
+    </div>
+   <div class="text-white max-w-80 text-6xl flex items-center">
+    Gestão de Vagas
+   </div>
+
+  </form>
+</body>
+ <script>
+  document.getElementById("submitForm").addEventListener("submit" , (e) => {
+   var password = document.getElementById("password").value;
+   var confirmPassword = document.getElementById("confirmPassword").value;
+
+   if(password != confirmPassword) {
+    document.getElementById("error_password").classList.remove("hidden");
+    event.preventDefault();
+   }
+  })
+ </script>
+
+</html>
