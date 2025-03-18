@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.joaopedro.front_gestao_vagas.modules.Candidate.dto.CreateCandidateDTO;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ApplyJobService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CandidateService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.FindJobsService;
@@ -46,8 +47,16 @@ import jakarta.servlet.http.HttpSession;
      }
 
      @GetMapping("/create")
-     public String create(){
+     public String create(Model model){
+        model.addAttribute("candidate", new CreateCandidateDTO());
          return "candidate/create";
+     }
+
+     @PostMapping("/create")
+     public String save(CreateCandidateDTO candidate, Model model) {
+        System.out.println(candidate.getName());
+        model.addAttribute("candidate", candidate);
+        return "candidate/create";
      }
 
      @PostMapping("/signIn")
