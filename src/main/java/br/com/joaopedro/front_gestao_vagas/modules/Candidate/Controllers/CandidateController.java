@@ -24,6 +24,7 @@ import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ApplyJobSer
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CandidateService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.FindJobsService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ProfileCandidateService;
+import br.com.joaopedro.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
  
  @Controller
@@ -63,7 +64,7 @@ import jakarta.servlet.http.HttpSession;
             System.out.println(candidate);
             
         }catch(HttpClientErrorException ex){
-            model.addAttribute("error_message", ex.getMessage());
+            model.addAttribute("error_message", FormatErrorMessage.formatErrorMessage(ex.getResponseBodyAsString()));
         }
         
         model.addAttribute("candidate", candidate);
