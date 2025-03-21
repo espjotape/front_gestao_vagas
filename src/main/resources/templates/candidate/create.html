@@ -11,26 +11,34 @@
 
    <div class="space-y-8 bg-zinc-950 rounded-md p-10 ">
     <h2 class="text-white text-center">Candidato, crie o seu cadastro gratuitamente</h2>
-    <input type="text" name="username" placeholder="User" 
-    th:field="*{username}"
-     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
-     <input type="text" name="name" placeholder="Nome" 
-     th:field="*{name}"
-     class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+    <div class="flex flex-row gap-10">
+      <input type="text" name="username" placeholder="User" 
+      th:field="*{username}"
+      class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+      <input type="text" name="name" placeholder="Nome" 
+      th:field="*{name}"
+      class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+    </div>
+    
+    <div class="flex flex-row gap-10">
      <input type="email" name="email" placeholder="Email"
      th:field="*{email}"
      class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
      <input type="password" name="password" placeholder="Password" id="password"
      th:field="*{password}"
      class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
+    </div>
+
+    <div class="flex flex-row gap-10">
      <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirmPassword"
      class="bg-gray-50 text-gray-980 text-xd rounded w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2" >
      <textarea name="description"  th:field="*{description}" placeholder="Digite uma breve descrição sobre você" class="bg-gray-50 text-gray-900 text-xd rounded w-96 block p-3 focus:outline-none focus:ring-green-600 focus:ring-2"></textarea>
-     
+    </div>
+
      <p class="text-red-400" th:if="${error_message}" th:text="${error_message}" ></p>
      <p class="text-red-400 hidden" id="error_password">Senhas não conferem</p>
   
-     <button class="bg-green-900 w-96 p-4 rounded text-white hover:bg-green-700">Cadastrar-se</button>
+     <button class="bg-green-900 w-full p-4 rounded text-white hover:bg-green-700">Cadastrar-se</button>
      <a href="candidate/login" class="block text-green-700 text-center underline underline-offset-2 hover:text-green-600">Fazer Login</a>
     </div>
    <div class="text-white max-w-80 text-6xl flex items-center">
