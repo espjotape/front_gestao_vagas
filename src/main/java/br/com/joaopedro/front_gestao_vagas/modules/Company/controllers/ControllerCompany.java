@@ -3,6 +3,7 @@ package br.com.joaopedro.front_gestao_vagas.modules.Company.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.joaopedro.front_gestao_vagas.modules.Candidate.security.CreateCandidateService;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.dto.CreateCompanyDTO;
+import br.com.joaopedro.front_gestao_vagas.modules.Company.dto.CreateJobsDTO;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.service.CreateCompanyService;
+import br.com.joaopedro.front_gestao_vagas.modules.Company.service.CreateJobService;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.service.LoginCompanyService;
 import br.com.joaopedro.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
@@ -27,7 +31,11 @@ public class ControllerCompany {
  @Autowired
  private CreateCompanyService createCompanyService;
 
- @Autowired LoginCompanyService loginCompanyService;
+ @Autowired 
+ private LoginCompanyService loginCompanyService;
+
+ @Autowired
+ private CreateJobService createJobService;
 
  @GetMapping("/create")
  public String create(Model model) {
@@ -79,7 +87,21 @@ public class ControllerCompany {
 
  @GetMapping("/jobs")
  @PreAuthorize("hasAuthority('ROLE_COMPANY')")
- public String jobs(){
+ public String jobs(Model model){
+  model.addAttribute("jobs", new CreateJobsDTO());
   return "company/jobs";
+ }
+
+ @PostMapping("/jobs")
+ @PreAuthorize("hasAuthority('ROLE_COMPANY')")
+ public String createJobs(CreateJobsDTO jobs){
+  var result = this.createJobService.execute(jobs, getToken());
+  System.out.println(result);
+  return "redirect:/company/jobs";
+ }
+
+ private String getToken(){
+  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  return authentication.getDetails().toString();
  }
 }
