@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+   <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Listagem de Vagas</title>
+ </head>
+ 
+ <body class="bg-sky-950 h-screen flex flex-col">
+  <nav class="bg-sky-800 p-8 flex justify-between items-center">
+   <div>
+      <a href="/company/jobs" class="text-white text-lg font-semibold">Cadastro</a>
+   </div>
+   <div>
+    <a href="/company/jobs/list" class="text-white text-lg font-semibold">Listagem</a>
+ </div>
+   <div>
+      <a href="/company/jobs/logout" class="text-white text-lg font-semibold">Logout</a>
+   </div>
+</nav>
+
+ <p class="text-center text-3xl text-white pt-8">Listagem de Vagas</p>
+ 
+ <div class="flex-grow pt-10 flex justify-center rounded-lg shadow-lg">
+    <div class="pb-3 w-9/12 max-w-full ">
+      <table class="w-full shadow-lg rounded-tl-lg rounded-tr-lg">
+       <thead>
+        <tr class="bg-gray-200 ">
+         <th class="text-left  py-2 px-4 rounded-tl-lg ">ID</th>
+         <th class="text-left  py-2 px-4">Descrição</th>
+         <th class="text-left  py-2 px-4">Benefícios</th>
+         <th class="text-left  py-2 px-4 rounded-tr-lg">Nivel</th>
+        </tr>
+       </thead>
+
+      <tbody>
+       <tr class="text-white">
+        <td class="border px-4 py-2">1</td>
+        <td class="border px-4 py-2">description</td>
+        <td class="border px-4 py-2">benefits</td>
+        <td class="border px-4 py-2">senior</td>
+       </tr>
+       <tr class="text-white">
+        <td class="border px-4 py-2 rounded-bl-lg">2</td>
+        <td class="border px-4 py-2">description</td>
+        <td class="border px-4 py-2">benefits</td>
+        <td class="border px-4 py-2 rounded-br-lg">junior</td>
+      </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+ </body>
+ 
+ </html>

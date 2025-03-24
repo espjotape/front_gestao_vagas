@@ -104,4 +104,11 @@ public class ControllerCompany {
   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
   return authentication.getDetails().toString();
  }
+
+ @GetMapping("/jobs/list")
+ @PreAuthorize("hasAuthority('ROLE_COMPANY')")
+ public String list(){
+  //model.addAttribute("jobs", new CreateJobsDTO());
+  return "company/list";
+ }
 }
