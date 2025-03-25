@@ -1,4 +1,4 @@
-package br.com.joaopedro.front_gestao_vagas.modules.Candidate.security;
+package br.com.joaopedro.front_gestao_vagas.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

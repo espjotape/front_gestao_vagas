@@ -1,4 +1,4 @@
-package br.com.joaopedro.front_gestao_vagas.modules.Candidate.security;
+package br.com.joaopedro.front_gestao_vagas.modules.Candidate.service;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +10,7 @@ import br.com.joaopedro.front_gestao_vagas.modules.Candidate.dto.CreateCandidate
 
 @Service
 public class CreateCandidateService  {
+ 
  public void execute (CreateCandidateDTO createCandidateDTO) {
   RestTemplate rt = new RestTemplate();
   

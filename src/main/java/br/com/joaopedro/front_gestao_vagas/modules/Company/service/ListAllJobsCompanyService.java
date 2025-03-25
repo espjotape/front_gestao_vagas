@@ -1,7 +1,5 @@
 package br.com.joaopedro.front_gestao_vagas.modules.Company.service;
 
-
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;

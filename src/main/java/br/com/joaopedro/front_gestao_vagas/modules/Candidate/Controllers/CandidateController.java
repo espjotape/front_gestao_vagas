@@ -19,9 +19,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.dto.CreateCandidateDTO;
-import br.com.joaopedro.front_gestao_vagas.modules.Candidate.security.CreateCandidateService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ApplyJobService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CandidateService;
+import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.CreateCandidateService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.FindJobsService;
 import br.com.joaopedro.front_gestao_vagas.modules.Candidate.service.ProfileCandidateService;
 import br.com.joaopedro.front_gestao_vagas.utils.FormatErrorMessage;
