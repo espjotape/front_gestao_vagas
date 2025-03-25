@@ -100,13 +100,8 @@ public class ControllerCompany {
  public String createJobs(CreateJobsDTO jobs){
   var result = this.createJobService.execute(jobs, getToken());
   System.out.println(result);
-  return "redirect:/company/jobs";
- }
-
- private String getToken(){
-  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-  return authentication.getDetails().toString();
- }
+  return "redirect:/company/jobs/list";
+ }  
 
  @GetMapping("/jobs/list")
  @PreAuthorize("hasAuthority('ROLE_COMPANY')")
@@ -116,4 +111,20 @@ public class ControllerCompany {
   System.out.println(result);
   return "company/list";
  }
+
+ @GetMapping("/logout")
+ public String logout(HttpSession session) {
+  SecurityContextHolder.getContext().setAuthentication(null);
+  SecurityContext securityContext = SecurityContextHolder.getContext();
+  session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+  session.setAttribute("token", null);
+
+  return "redirect:/company/login";
+ }
+
+ private String getToken(){
+  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  return authentication.getDetails().toString();
+ }
+
 }
