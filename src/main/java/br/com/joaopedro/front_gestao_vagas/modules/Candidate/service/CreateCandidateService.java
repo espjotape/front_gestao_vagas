@@ -1,5 +1,6 @@
 package br.com.joaopedro.front_gestao_vagas.modules.Candidate.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,6 +11,9 @@ import br.com.joaopedro.front_gestao_vagas.modules.Candidate.dto.CreateCandidate
 
 @Service
 public class CreateCandidateService  {
+
+ @Value("${host.api.gestao.vagas}")
+ private String hostAPIGestaoVagas;
  
  public void execute (CreateCandidateDTO createCandidateDTO) {
   RestTemplate rt = new RestTemplate();
@@ -19,7 +23,9 @@ public class CreateCandidateService  {
 
   HttpEntity<CreateCandidateDTO> request = new HttpEntity<>(createCandidateDTO, headers);
 
-  var result = rt.postForEntity("http://localhost:8080/candidate/", request, String.class);
+  var url = hostAPIGestaoVagas.concat("/candidate/");
+
+  var result = rt.postForEntity(url, request, String.class);
   System.out.println(result);
  }
 }
