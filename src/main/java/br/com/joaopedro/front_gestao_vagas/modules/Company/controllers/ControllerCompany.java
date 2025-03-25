@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.joaopedro.front_gestao_vagas.modules.Candidate.security.CreateCandidateService;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.dto.CreateCompanyDTO;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.dto.CreateJobsDTO;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.service.CreateCompanyService;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.service.CreateJobService;
+import br.com.joaopedro.front_gestao_vagas.modules.Company.service.ListAllJobsCompanyService;
 import br.com.joaopedro.front_gestao_vagas.modules.Company.service.LoginCompanyService;
 import br.com.joaopedro.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +36,9 @@ public class ControllerCompany {
 
  @Autowired
  private CreateJobService createJobService;
+
+ @Autowired
+ private ListAllJobsCompanyService listAllJobsCompanyService;
 
  @GetMapping("/create")
  public String create(Model model) {
@@ -107,8 +110,10 @@ public class ControllerCompany {
 
  @GetMapping("/jobs/list")
  @PreAuthorize("hasAuthority('ROLE_COMPANY')")
- public String list(){
-  //model.addAttribute("jobs", new CreateJobsDTO());
+ public String list(Model model){
+  var result = this.listAllJobsCompanyService.execute(getToken());
+  model.addAttribute("jobs", result);
+  System.out.println(result);
   return "company/list";
  }
 }
